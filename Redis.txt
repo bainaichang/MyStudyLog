@@ -1,0 +1,10 @@
+启动Reids
+redis-server
+redis-cli
+keys * 查看所有key
+keys ? 可以使用通配符
+del k
+exists k
+expire seconds 设置存活时间
+ttl 查看剩余时间
+
