@@ -87,7 +87,7 @@ public class AppConfig{
 ```java
 Logger log = LoggerFactory.getLogger(getClass());
 log.info("info日志");
-// @Slf4j 会自动给属性注入log对象
+// @Slf4j 会自动给属性注入log对象 @Data 自动添加getter setter
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
@@ -117,5 +117,37 @@ logging:
   group:
     MyGroupName:
       com.bainai.controller,com.bainai.dao
+# 可以放磁盘
+logging.file.path=/opt/spring/log
+logging.file.name=xxx.log
+# 如果都配置,只看filename
+# 文件名
+logging.logback.rollingpolicy.file-name-pattern=...
+# 每个日志的最大大小
+logging.logback.rollingpolicy.max-file-size
+# 日志总的最大大小
+logging.logback.rollingpolicy.total-size-cap
+# 日志保存的最大天数
+logging.logback.rollingpolicy.max-history
+```
+
+参数校验
+
+```java
+public Result register(@Pattern(regexp="^\\S{5,16}$") String username,@Pattern(regexp="^\\S{5,16$}") String password){
+    ...
+}
+```
+
+全局异常处理
+
+```java
+@RestControllerAdvice
+public class GlobalExceptionHandler{
+	@ExceptionHandler(Exception.class)
+	public Result handleException(Exception e){
+        ...
+    }
+}
 ```
 
