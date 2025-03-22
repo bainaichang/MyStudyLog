@@ -1,5 +1,11 @@
 一行叫 rowkey,一行对应着多个列族(Map)
 
+```xml
+table => List<rowkey(下面那个)>
+rowkey => List<HashMap>
+ColumnFamily:ColumnName => HashMap
+```
+
 一个表有多个行,一行有多个列族 (如果不好理解的话结合下面的示例进行辅助理解)
 
 ![image-20250124123526375](C:\Users\白乃常\AppData\Roaming\Typora\typora-user-images\image-20250124123526375.png)

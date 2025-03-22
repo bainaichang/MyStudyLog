@@ -221,6 +221,64 @@ a {
             height: 100px;
             width: 500px;
         }
+
+/*
+*** 以下是一个美观且带有交互效果的蓝色按钮CSS样式
+	.blue-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #4A90E2, #2B6CD4);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(43, 108, 212, 0.3);
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* 悬停效果 */
+.blue-btn:hover {
+    background: linear-gradient(135deg, #2B6CD4, #4A90E2);
+    box-shadow: 0 6px 16px rgba(43, 108, 212, 0.4);
+    transform: translateY(-1px);
+}
+
+/* 点击效果 */
+.blue-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 6px rgba(43, 108, 212, 0.3);
+}
+
+/* 可选 - 添加点击涟漪效果 */
+.blue-btn::after {
+	width: 80px;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    from {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(20);
+        opacity: 0;
+    }
+}
+*/
     </style>
 ```
 
