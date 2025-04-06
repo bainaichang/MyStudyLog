@@ -219,3 +219,42 @@ PMA 协处理器    				0拷贝
 回归 > 模拟量
 
 模式识别（ocr）、机器学习、
+
+# 搜索
+
+稀疏搜索
+密集搜索
+倒排索引
+
+词频和逆频
+
+一个词在一个文章中出现的次数, 越多越好
+
+一个词在一群文章出现的次数(1个文章算一次), 越少越好
+
+```hive
+TermRangeQuery
+PrefixQuery
+wildcardQuery
+=============
+RegexpQuery 正则
+FuzzyQuery
+PhraseQuery 一个条件搜索多列
+stringquery
+matchquery 分词搜索分词==>>不支持表达式
+```
+
+```markdown
+MUST 与
+should 或 影响词权
+MUST_NOT 非
+Filter 或 不影响
+```
+
+组播UDP
+
+
+
+WAP_x_PSK 代表简单认证
+WEP 可以不设置密码
+WAPI 国产,兼容性差

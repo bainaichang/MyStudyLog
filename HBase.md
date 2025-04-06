@@ -14,6 +14,7 @@ ColumnFamily:ColumnName => HashMap
 
 ```ruby
 create "表名","列族名1","列族名2";
+# decribe 'table_name' 查看表信息
 ```
 
 删除表
@@ -255,6 +256,7 @@ scan全表查询(需要配合过滤器)
 public void scanTest() throws Exception{
     Table table = conn.getTable(TableName.valueOf("order_info_01"));
     Scan scan = new Scan();
+    // FilterList 多个过滤条件
     ValueFilter valueFilter = new ValueFilter(CompareOperator.EQUAL,new SubstringComparator("Bot"));
     scan.setFilter(valueFilter);
     ResultScanner resultScanner = table.getScanner(scan);
@@ -284,4 +286,6 @@ drop_namespace 'name'
 describe_namespace 'name'
 create 'namespace:table', '列族1'
 ```
+
+LSM-Tree
 
