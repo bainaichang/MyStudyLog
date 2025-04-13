@@ -18,3 +18,48 @@ zab协议, raft协议, etcd分布式键值对储存
 (最终|弱)一致性
 强一致性(raft zab paxos)
 共识一致性(区块链)
+0.22 -> 1.0
+0.23 -> 2.0
+2.x  -> 3.0
+datanode -> namenode 3s 发一个心跳包并附带汇报
+把DFS换成journeynode 类似于 zookeeper
+safegroupf 选奇数个为一组
+zkfc 在zk目录下建立文件,告诉我是主机
+namenode的元数据可能会满
+datanode 2个文件夹,汇报给不同的namenode
+zk => VIEW_FS HASHMAP 将主机的信息放HASHMAP里
+架构
+1. 总体架构 画架构图
+2.  数据结构设计
+3.  详细架构设计 -> 接口
+4.  开发架构 代码
+5.  物理结构
+6. 运维架构	故障重启 升级流程 运行流程
+7. 故障架构	回滚流程
+
+组织结构
+						总监
+			开发					项目管理			运营	
+		前端(产品经理)|后端(架构师)				工期|行政			hr
+     UI|产品助理|前端开发|测试  || 后端开发|运维开发|测试开发
+
+PE块	yarn	MapReduce jobtracker tasktracker(干活的人)
+Kafuka
+
+队列模式
+1 to 1
+1 to m
+1 req 1 resp
+
+dicrt
+fanout==cache 消费了不丢弃
+topic
+
+
+
+
+
+
+
+
+
