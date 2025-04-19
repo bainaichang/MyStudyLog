@@ -55,6 +55,24 @@ dicrt
 fanout==cache 消费了不丢弃
 topic
 
+java的13种标准 JavaEE
+jmail corba(多语言序列化接口) rmi
+jms jdbc jslt jndi jsp jca/cci(erp) jta/jts xml解析器
+ejb(sessionbean entrybean messagebean)
+
+coap udp -> 1460 bytes
+1.低功耗
+2.信号
+
+mqtt
+网卡 -> 帧 1500B 网卡会进行重发
+包
+
+
+
+
+
+
 
 
 
