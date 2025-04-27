@@ -343,3 +343,265 @@ Console.WriteLine(obj.name);
 Console.WriteLine(obj.age);
 ```
 
+# C#的record
+
+```c#
+public record Person(string FirstName, string LastName);
+// 创建
+var person1 = new Person("John", "Doe");
+var person2 = new Person("John", "Doe");
+// 值相等性比较
+Console.WriteLine(person1 == person2);  // 输出: True
+
+// 解构
+var (firstName, lastName) = person1;
+Console.WriteLine(firstName);  // 输出: John
+
+// ToString 自动生成
+Console.WriteLine(person1);  // 输出: Person { FirstName = John, LastName = Doe }
+
+// 可以添加方法和属性
+public record Person(string FirstName, string LastName)
+{
+    public string FullName => $"{FirstName} {LastName}";
+    
+    public void Greet() => Console.WriteLine($"Hello, {FullName}!");
+}
+// 可变 record
+public record MutablePerson
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+```
+
+# c#的解构语法
+
+# C# 解构语法与元组完全指南
+
+## 解构(Deconstruction)语法
+
+### 基本概念
+解构允许将对象的属性分解到单独的变量中，`record`类型会自动生成解构方法。
+
+### 基础用法
+```csharp
+// 定义record
+public record Person(string FirstName, string LastName);
+
+// 解构使用
+var person = new Person("张", "三");
+var (firstName, lastName) = person;
+Console.WriteLine($"姓名：{lastName}{firstName}"); // 输出：姓名：三张
+```
+
+### 解构方法实现原理
+
+等效于调用自动生成的`Deconstruct`方法：
+
+```c#
+person.Deconstruct(out string firstName, out string lastName);
+```
+
+### 忽略不需要的字段
+
+```C#
+var (_, lastName) = person; // 只解构lastName
+```
+
+## 自定义类的解构实现
+
+### 实现Deconstruct方法
+
+```C#
+public class Book
+{
+    public string Title { get; }
+    public string Author { get; }
+    public decimal Price { get; }
+
+    public Book(string title, string author, decimal price)
+    {
+        Title = title;
+        Author = author;
+        Price = price;
+    }
+
+    // 解构方法实现
+    public void Deconstruct(out string title, out string author, out decimal price)
+    {
+        title = Title;
+        author = Author;
+        price = Price;
+    }
+}
+```
+
+### 使用示例
+
+```c#
+var book = new Book("C#高级编程", "Jon Skeet", 99.9m);
+var (title, author, price) = book;
+Console.WriteLine($"{title} by {author} 售价：{price}"); 
+```
+
+## 元组(Tuple)语法
+
+### 元组基本用法
+
+```C#
+// 定义返回元组的方法
+public (int width, int height) GetDisplaySize() => (1920, 1080);
+
+// 使用元组
+var size = GetDisplaySize();
+Console.WriteLine($"分辨率：{size.width}x{size.height}");
+```
+
+### 元组解构
+
+```c#
+var (w, h) = GetDisplaySize();
+Console.WriteLine($"宽：{w}，高：{h}");
+```
+
+## 实际应用场景
+
+### 1. 多返回值处理
+
+```C#
+public (bool success, string message) TryProcess(string input)
+{
+    if(string.IsNullOrEmpty(input))
+        return (false, "输入不能为空");
+    
+    // 处理逻辑...
+    return (true, "处理成功");
+}
+
+var result = TryProcess("test");
+if(result.success)
+    Console.WriteLine(result.message);
+```
+
+### 2. 字典遍历
+
+```C#
+var dict = new Dictionary<int, string>{{1,"A"}, {2,"B"}};
+foreach(var (key, value) in dict)
+{
+    Console.WriteLine($"{key}:{value}");
+}
+```
+
+### 3. LINQ查询结果处理
+
+```C#
+var products = new List<Product>();
+//...
+var productInfos = products
+    .Select(p => (p.Name, p.Price))
+    .OrderBy(x => x.Price);
+
+foreach(var (name, price) in productInfos)
+{
+    Console.WriteLine($"{name}: {price:C}");
+}
+```
+
+# C#运算符重载
+
+```c#
+using System;
+
+// 定义 Point 类
+public class Point
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+
+    // 构造函数
+    public Point(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    // 重载 + 运算符
+    public static Point operator +(Point p1, Point p2)
+    {
+        return new Point(p1.X + p2.X, p1.Y + p2.Y);
+    }
+
+    // 重载 - 运算符
+    public static Point operator -(Point p1, Point p2)
+    {
+        return new Point(p1.X - p2.X, p1.Y - p2.Y);
+    }
+
+    // 重写 ToString 方法以便输出对象信息
+    public override string ToString()
+    {
+        return $"({X}, {Y})";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // 创建两个 Point 对象
+        Point p1 = new Point(10, 20);
+        Point p2 = new Point(5, 10);
+
+        // 使用重载的 + 运算符
+        Point sum = p1 + p2;
+        Console.WriteLine($"p1 + p2 = {sum}");
+
+        // 使用重载的 - 运算符
+        Point difference = p1 - p2;
+        Console.WriteLine($"p1 - p2 = {difference}");
+    }
+}
+```
+
+在 C# 里，`null` 条件运算符是一种用于简化空值检查的语法糖，主要有 `?.` 和 `?[]` 两种形式。下面详细介绍它们的使用方法。
+
+# `?.` 成员访问运算符
+
+该运算符用来在访问对象的成员（如属性、方法等）之前，检查对象是否为 `null`。若对象为 `null`，表达式会直接返回 `null`，而不会引发 `NullReferenceException` 异常。
+
+以下是一个使用 `?.` 运算符访问属性和调用方法的示例：
+
+```csharp
+using System;
+
+class Person
+{
+    public string Name { get; set; }
+    public void SayHello()
+    {
+        Console.WriteLine($"Hello, my name is {Name}.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person person1 = new Person { Name = "Alice" };
+        Person person2 = null;
+
+        // 使用 ?. 访问属性
+        string name1 = person1?.Name;
+        string name2 = person2?.Name;
+
+        Console.WriteLine($"Name of person1: {name1}");
+        Console.WriteLine($"Name of person2: {name2}");
+
+        // 使用 ?. 调用方法
+        person1?.SayHello();
+        person2?.SayHello();
+    }
+}
+```
