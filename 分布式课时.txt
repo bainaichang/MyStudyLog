@@ -68,10 +68,13 @@ mqtt
 网卡 -> 帧 1500B 网卡会进行重发
 包
 
-
-
-
-
+Docker
+云计算
+overlay覆盖层 mac,ip,udp<data: <mac,ip,tcp>>
+动态配置网络 sdn -> underlay
+igp(运营商内部网络) 内部网关常用协议 rip(路径长度)、ospf(生成树):构建路由表
+bgp(跨域运营商的网络) flannal calico
+pc-->swr(转发协议)
 
 
 
